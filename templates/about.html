@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block title %}About · MotoSense AI{% endblock %}
+{% block content %}
+<div class="page-heading"><p class="eyebrow">ABOUT THE PROJECT</p><h1>Designed to explore proactive maintenance.</h1><p>MotoSense AI is a student portfolio prototype demonstrating full-stack development, data handling, and explainable risk-flag logic.</p></div>
+<div class="feature-grid">
+  <article class="feature"><span class="feature-icon">⌘</span><h3>Data capture</h3><p>Records odometer, days since service, engine temperature, vibration readings, and notes.</p></article>
+  <article class="feature"><span class="feature-icon">◈</span><h3>Explainable flags</h3><p>Shows which demo thresholds contributed to a Low, Medium, or High flag.</p></article>
+  <article class="feature"><span class="feature-icon">▤</span><h3>Service analytics</h3><p>Summarises records and exports data to CSV for further analysis.</p></article>
+</div>
+<div class="notice"><strong>Data and safety:</strong> No Royal Enfield internal data or official specifications are included. The prototype's rules are illustrative and are not validated mechanical diagnostics. A real version would require permissioned, representative sensor/service data, expert-defined labels, rigorous validation, and safety review.</div>
+<section class="content-card"><h2>Technology</h2><div class="chips"><span>Python</span><span>Flask</span><span>SQLite</span><span>Scikit-learn demo</span><span>Pandas</span><span>HTML / CSS</span></div><h2>Model note</h2><p>{{ model_note }}</p></section>
+{% endblock %}

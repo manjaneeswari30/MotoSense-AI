@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block title %}Dashboard · MotoSense AI{% endblock %}
+{% block content %}
+<section class="hero">
+  <div><p class="eyebrow">MOTORCYCLE SERVICE INTELLIGENCE</p><h1>Ride smarter.<br><span>Maintain proactively.</span></h1><p class="hero-copy">Track condition inputs and service history in one simple dashboard.</p><a class="btn primary" href="{{ url_for('add_motorcycle') }}">＋ Add motorcycle record</a></div>
+  <div class="hero-art"><div class="orbit orbit-one"></div><div class="orbit orbit-two"></div><div class="bike-icon">🏍️</div><div class="art-label">HEALTH INSIGHTS <span>● LIVE DEMO</span></div></div>
+</section>
+<div class="notice"><strong>Prototype notice:</strong> Risk levels are illustrative rule-based estimates, not validated failure predictions. Use the owner's manual and a qualified mechanic for real maintenance decisions.</div>
+<section class="stats">
+  <div class="stat-card"><span class="stat-icon blue">▦</span><span class="stat-label">Total records</span><strong>{{ total }}</strong><small>Motorcycles entered</small></div>
+  <div class="stat-card"><span class="stat-icon red">!</span><span class="stat-label">High risk flags</span><strong>{{ high }}</strong><small>Review these entries first</small></div>
+  <div class="stat-card"><span class="stat-icon amber">◷</span><span class="stat-label">Medium risk flags</span><strong>{{ medium }}</strong><small>Review service history</small></div>
+  <div class="stat-card"><span class="stat-icon green">✓</span><span class="stat-label">Low risk flags</span><strong>{{ low }}</strong><small>No demo-rule flags</small></div>
+</section>
+<section class="section-head"><div><p class="eyebrow">FLEET OVERVIEW</p><h2>Motorcycle records</h2></div><a class="btn secondary" href="{{ url_for('export_csv') }}">⇩ Export CSV</a></section>
+{% if items %}
+<div class="table-wrap"><table><thead><tr><th>Motorcycle / Owner</th><th>Odometer</th><th>Last service</th><th>Condition inputs</th><th>Demo risk</th><th>Action</th></tr></thead><tbody>
+{% for item in items %}
+<tr>
+<td><strong>{{ item.motorcycle_model }}</strong><small>{{ item.owner_name }} · Added {{ item.created_at }}</small></td>
+<td>{{ "{:,.0f}".format(item.odometer_km) }} km</td>
+<td>{{ item.days_since_service }} days ago</td>
+<td><small>Temp: {{ item.engine_temp_c }}°C</small><small>Vibration: {{ item.vibration_mm_s }} mm/s</small></td>
+<td><span class="risk {{ item.risk_level|lower }}">{{ item.risk_level }}</span><small>{{ item.risk_reasons|length }} flag(s)</small></td>
+<td><form method="post" action="{{ url_for('delete_record', record_id=item.id) }}" onsubmit="return confirm('Delete this record?')"><button class="text-button" type="submit">Delete</button></form></td>
+</tr>
+<tr class="reason-row"><td colspan="6"><b>Assessment:</b> {{ item.advice }} {% if item.risk_reasons %}<span class="muted">Flags: {{ item.risk_reasons|join('; ') }}</span>{% endif %}</td></tr>
+{% endfor %}
+</tbody></table></div>
+{% else %}
+<div class="empty"><div class="empty-icon">＋</div><h3>No motorcycle records yet</h3><p>Add a sample record to see the dashboard and risk flags in action.</p><a class="btn primary" href="{{ url_for('add_motorcycle') }}">Add first record</a></div>
+{% endif %}
+<p class="model-note">{{ model_note }}</p>
+{% endblock %}

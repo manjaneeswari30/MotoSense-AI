@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %}Add record · MotoSense AI{% endblock %}
+{% block content %}
+<div class="page-heading"><p class="eyebrow">RECORD CONDITION DATA</p><h1>Add a motorcycle</h1><p>Enter service information and available condition readings. Use sample values for a demo.</p></div>
+<form class="form-card" method="post">
+  <div class="form-grid">
+    <label>Owner / record name<input name="owner_name" required maxlength="100" placeholder="e.g. Demo Rider"></label>
+    <label>Motorcycle model<input name="motorcycle_model" required maxlength="100" placeholder="e.g. Classic 350 (sample)"></label>
+    <label>Odometer (km)<input name="odometer_km" type="number" min="0" step="1" required value="12500"></label>
+    <label>Days since last service<input name="days_since_service" type="number" min="0" step="1" required value="90"></label>
+    <label>Engine temperature (°C)<input name="engine_temp_c" type="number" min="0" max="200" step="0.1" required value="92"></label>
+    <label>Vibration (mm/s)<input name="vibration_mm_s" type="number" min="0" step="0.1" required value="2.5"></label>
+    <label class="full">Service notes<textarea name="service_notes" rows="4" placeholder="Recent service, parts changed, or observations"></textarea></label>
+  </div>
+  <div class="form-note">Only enter readings you have measured or clearly label them as simulated. Demo thresholds are not manufacturer specifications.</div>
+  <div class="form-actions"><a class="btn secondary" href="{{ url_for('index') }}">Cancel</a><button class="btn primary" type="submit">Save record →</button></div>
+</form>
+{% endblock %}
