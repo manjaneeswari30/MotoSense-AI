@@ -77,3 +77,6 @@ MotoSense_AI/
 **MotoSense AI — Predictive Motorcycle Maintenance Prototype** | Python, Flask, SQLite, scikit-learn
 - Built a web application to record motorcycle condition and service history, surface explainable demo maintenance-risk flags, and export records for analysis.
 - Created an optional scikit-learn workflow to demonstrate model training and evaluation on synthetic data, documenting the limitations of simulated labels.
+- ## 🚀 Live Demo
+
+[**Click here to try MotoSense AI**](https://motosense-ai-manjaneeswari.onrender.com)
